@@ -1,4 +1,4 @@
-from modules import search, insert
+from modules import search, insert, display
 # Modulo para crear directorios, revisar archivos
 import os
 
@@ -14,7 +14,7 @@ def find():
     name = name.replace(' ','').strip()
     print(name)
     while len(name) < 2 or not name.isalpha():
-        print(f'No valido')
+        print(f'No valido\n')
         name=input(msg)
         name = name.replace(' ','').strip()
     result = search.find(name.capitalize())
@@ -25,43 +25,44 @@ def new():
     name = input(msg)
     name = name.replace(' ','').strip()
     while len(name.replace(' ','')) < 2 or len(name.replace(' ','')) > 25 or not name.isalpha():
-        print('No valido')
+        print('No valido\n')
         name = input(msg)
         name = name.replace(' ','').strip()
     result = insert.new(name.capitalize())
     return result
 
 def show():
-    pass
+    result = display.show()
+    return result
 
 def delete():
     pass
 
 def exit():
-    return f'¡Adios!', False
+    return f'¡Adios!\n', False
 
 def menu():
     # Inicializo la variable status que sera la condicional para salir del bucle general
     status = True
     option = {
-        1 : find,
+        1 : show,
         2 : new,
         3 : delete,
-        4 : show,
+        4 : find,
         5 : exit,
     }
 
     #Mientras STATUS sea True se sigue ejecutando
     while status:
         # Genero el menu de opciones
-        menu="Elige una opcion valida:\n1.- Verificar nomrbe en lista\n2.- Agregar nombre\n3.- Borrar nombre\n4.- Mostrar lista\n5.- Salir\n>>> "
+        menu="Elige una opcion valida:\n1.- Mostrar nombres\n2.- Agregar nombre\n3.- Borrar nombre\n4.- Buscar en lista\n5.- Salir\n>>> "
         
         # Solicito por pantalla el ingreso de la opcion
         selection = input(menu)
         
         # Mientras el valor ingresado no sea numero o el numero sea menor a uno o mayor a 4 queda en el bucle
         while not selection.isnumeric() or int(selection) < 1 or int(selection) > 4:
-            print(f"'{selection.upper()}' no es valido")
+            print(f"'{selection.upper()}' no es valido\n")
             selection = input(menu)
         # Una vez que se ingresa una opcion valida se convierte el valor ingresado en entero
         selection = int(selection)
